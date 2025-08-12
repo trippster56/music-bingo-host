@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+    <PackageReference Include="TagLibSharp" Version="2.3.0" />
+    <PackageReference Include="System.Windows.Forms" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

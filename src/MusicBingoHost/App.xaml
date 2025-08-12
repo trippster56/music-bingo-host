@@ -1,12 +1,16 @@
 <Application x:Class="MusicBingoHost.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MusicBingoHost"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/LightTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Converters -->
+            <local:Converters.IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

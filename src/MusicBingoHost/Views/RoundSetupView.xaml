@@ -1,0 +1,98 @@
+<UserControl x:Class="MusicBingoHost.Views.RoundSetupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Round Setup" FontSize="24" FontWeight="Bold" 
+                      Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,10"/>
+            <TextBlock Text="Select a folder containing your music files to create a bingo round." 
+                      Foreground="{DynamicResource ForegroundBrush}"/>
+        </StackPanel>
+        
+        <!-- Folder Selection -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,20">
+            <Button Content="Select Music Folder" 
+                    Command="{Binding SelectFolderCommand}"
+                    Padding="15,8" Margin="0,0,10,0"
+                    Background="{DynamicResource AccentBrush}"
+                    Foreground="White" BorderThickness="0"/>
+            
+            <TextBlock Text="{Binding SelectedFolderPath}" 
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource ForegroundBrush}"
+                      FontStyle="Italic"/>
+        </StackPanel>
+        
+        <!-- Loading Status -->
+        <StackPanel Grid.Row="2" Margin="0,0,0,20">
+            <ProgressBar IsIndeterminate="{Binding IsLoading}" 
+                        Height="4" Margin="0,0,0,10"
+                        Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            
+            <TextBlock Text="{Binding LoadingStatus}" 
+                      Foreground="{DynamicResource ForegroundBrush}"
+                      FontWeight="SemiBold"/>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0"
+                       Visibility="{Binding TotalTracks, Converter={StaticResource IntToVisibilityConverter}}">
+                <TextBlock Text="Tracks: " Foreground="{DynamicResource ForegroundBrush}"/>
+                <TextBlock Text="{Binding SupportedTracks}" Foreground="Green" FontWeight="Bold"/>
+                <TextBlock Text=" supported, " Foreground="{DynamicResource ForegroundBrush}"/>
+                <TextBlock Text="{Binding UnsupportedTracks}" Foreground="Red" FontWeight="Bold"/>
+                <TextBlock Text=" unsupported" Foreground="{DynamicResource ForegroundBrush}"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <!-- Track Lists -->
+        <TabControl Grid.Row="3" Background="{DynamicResource BackgroundBrush}">
+            
+            <!-- Supported Tracks -->
+            <TabItem Header="{Binding SupportedTracks, StringFormat='Supported Tracks ({0})'}">
+                <DataGrid ItemsSource="{Binding Tracks}"
+                         AutoGenerateColumns="False"
+                         IsReadOnly="True"
+                         CanUserSortColumns="True"
+                         GridLinesVisibility="Horizontal"
+                         Background="{DynamicResource BackgroundBrush}"
+                         Foreground="{DynamicResource ForegroundBrush}">
+                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
+                        <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width="*"/>
+                        <DataGridTextColumn Header="Duration" Binding="{Binding Duration, StringFormat=mm\\:ss}" Width="80"/>
+                        <DataGridTextColumn Header="File" Binding="{Binding FileName}" Width="200"/>
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+            </TabItem>
+            
+            <!-- Unsupported Files -->
+            <TabItem Header="{Binding UnsupportedTracks, StringFormat='Unsupported Files ({0})'}"
+                    Visibility="{Binding UnsupportedTracks, Converter={StaticResource IntToVisibilityConverter}}">
+                <DataGrid ItemsSource="{Binding UnsupportedFiles}"
+                         AutoGenerateColumns="False"
+                         IsReadOnly="True"
+                         Background="{DynamicResource BackgroundBrush}"
+                         Foreground="{DynamicResource ForegroundBrush}">
+                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="File" Binding="{Binding FileName}" Width="*"/>
+                        <DataGridTextColumn Header="Reason" Binding="{Binding UnsupportedReason}" Width="*"/>
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+            </TabItem>
+            
+        </TabControl>
+        
+    </Grid>
+</UserControl>
