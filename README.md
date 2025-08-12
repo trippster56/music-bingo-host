@@ -1,4 +1,4 @@
-# Music Bingo Host
+# Music Bingo Host 1.0
 
 A WPF application for hosting music bingo games with MVVM architecture.
 
