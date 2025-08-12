@@ -1,0 +1,96 @@
+<Window x:Class="MusicBingoHost.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Music Bingo Host" Height="600" Width="900"
+        Background="{DynamicResource BackgroundBrush}">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header with Theme Toggle -->
+        <Border Grid.Row="0" Background="{DynamicResource TabBackgroundBrush}" 
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="Music Bingo Host" 
+                          FontSize="18" FontWeight="Bold" 
+                          Foreground="{DynamicResource ForegroundBrush}"
+                          VerticalAlignment="Center"/>
+                
+                <Button Grid.Column="1" Content="🌙/☀️" 
+                        Command="{Binding ToggleThemeCommand}"
+                        Background="Transparent" 
+                        BorderThickness="0"
+                        FontSize="16" 
+                        Padding="10,5"
+                        ToolTip="Toggle Dark/Light Theme"/>
+            </Grid>
+        </Border>
+        
+        <!-- Tab Control -->
+        <TabControl Grid.Row="1" 
+                    SelectedIndex="{Binding SelectedTabIndex}"
+                    Background="{DynamicResource BackgroundBrush}"
+                    BorderBrush="{DynamicResource BorderBrush}">
+            
+            <TabItem Header="Round Setup">
+                <Border Background="{DynamicResource BackgroundBrush}" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Round Setup" FontSize="24" FontWeight="Bold" 
+                                  Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,20"/>
+                        <TextBlock Text="Configure your music bingo round settings here." 
+                                  Foreground="{DynamicResource ForegroundBrush}"/>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+            <TabItem Header="Cards">
+                <Border Background="{DynamicResource BackgroundBrush}" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Bingo Cards" FontSize="24" FontWeight="Bold" 
+                                  Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,20"/>
+                        <TextBlock Text="Generate and manage bingo cards here." 
+                                  Foreground="{DynamicResource ForegroundBrush}"/>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+            <TabItem Header="Run">
+                <Border Background="{DynamicResource BackgroundBrush}" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Run Game" FontSize="24" FontWeight="Bold" 
+                                  Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,20"/>
+                        <TextBlock Text="Host and control the bingo game here." 
+                                  Foreground="{DynamicResource ForegroundBrush}"/>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+            <TabItem Header="Settings">
+                <Border Background="{DynamicResource BackgroundBrush}" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Settings" FontSize="24" FontWeight="Bold" 
+                                  Foreground="{DynamicResource ForegroundBrush}" Margin="0,0,0,20"/>
+                        <TextBlock Text="Application settings and preferences." 
+                                  Foreground="{DynamicResource ForegroundBrush}"/>
+                        
+                        <CheckBox Content="Dark Theme" 
+                                 IsChecked="{Binding IsDarkTheme}"
+                                 Command="{Binding ToggleThemeCommand}"
+                                 Foreground="{DynamicResource ForegroundBrush}"
+                                 Margin="0,20,0,0"/>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+            
+        </TabControl>
+        
+    </Grid>
+</Window>
